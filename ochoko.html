@@ -17,6 +17,7 @@
         function printShape(height = 30, width = 40, padding = 4) {
             let outerArray = []
             let innerArray = []
+            let boxArray =[]
             let boxCount = 1
 
             //get the padding
@@ -25,16 +26,29 @@
                 //reset counter to get the correct value
                 boxCount = 0
 
-                do {
-                    height = height - padding
-                    width = width - padding
-                    boxCount++;
-                }
-                while (height > 20 && width > 20);
+                while(height > 20 && width > 20) {
 
-                document.writeln("Number of Box is: " + boxCount + "<br>");
+                   
+                        height = height - padding
+                        width = width - padding
+
+                        if (height >= 20 && width  >= 20) {
+
+                            //save the box properties
+                            boxProps = {
+                                height: height,
+                                width:width
+                            }
+                            boxArray.push(boxProps)
+                            boxCount++;
+                        }
+                }
+               
+                document.writeln("Number of Box(es): " + boxCount + "<br>");
+                console.log(boxArray)
             }
 
+            //draw the outer box
             for (let Outerindex = 1; Outerindex <= height; Outerindex++) {
                 if (Outerindex == 1 || Outerindex == height) {
 
@@ -63,6 +77,11 @@
                             //two circles for now
                             //I think you need to use array here
                             if (boxCount > 1) {
+
+                                // for (let index = 0; index < boxArray.length; index++) {
+                                //     console.log(boxArray[index].height)
+                                    
+                                // }
 
                                 let endHeight = (height - padding)
                                 let startHeight = (height - endHeight)
