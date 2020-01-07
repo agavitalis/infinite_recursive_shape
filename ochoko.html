@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crazy Algorithm</title>
+</head>
+
+<body>
+    <div id="appBody">
+
+    </div>
+
+    <script>
+        function printShape(height = 30, width = 40, padding = 4) {
+            let outerArray = []
+            let innerArray = []
+            let boxCount = 1
+
+            //get the padding
+            if ((height - padding) > 20 && (width - padding) > 20) {
+
+                //reset counter to get the correct value
+                boxCount = 0
+
+                do {
+                    height = height - padding
+                    width = width - padding
+                    boxCount++;
+                }
+                while (height > 20 && width > 20);
+
+                document.writeln("Number of Box is: " + boxCount + "<br>");
+            }
+
+            for (let Outerindex = 1; Outerindex <= height; Outerindex++) {
+                if (Outerindex == 1 || Outerindex == height) {
+
+                    for (let index = 1; index <= (width - 2); index++) {
+
+                        if (index == 1 || index == (width - 2)) {
+                            innerArray.push("|")
+                        }
+                        else {
+                            innerArray.push("*")
+                        }
+
+                    }
+                    outerArray.push(innerArray)
+                    innerArray = []
+
+                } else {
+
+                    for (let index = 1; index <= (width - 2); index++) {
+
+                        if (index == 1 || index == (width - 2)) {
+                            innerArray.push("|")
+                        }
+                        else {
+                            //then draw other circles
+                            //two circles for now
+                            //I think you need to use array here
+                            if (boxCount > 1) {
+
+                                let endHeight = (height - padding)
+                                let startHeight = (height - endHeight)
+
+                                if (Outerindex == startHeight || Outerindex == endHeight) {
+
+                                    if (index == 2 || index == (width - 3)) {
+                                        innerArray.push("|")
+                                    }
+                                    else {
+                                        innerArray.push("*")
+                                    }
+
+                                } else if (Outerindex > startHeight && Outerindex < endHeight) {
+
+                                    if (index == 2 || index == (width - 3)) {
+                                        innerArray.push("|")
+                                    }
+                                    else {
+                                        innerArray.push("&#160;&#160;")
+                                    }
+                                }
+                                else {
+                                    innerArray.push("&#160;&#160;")
+                                }
+
+                            }
+                        }
+
+                    }
+                    outerArray.push(innerArray)
+                    innerArray = []
+                }
+
+            }
+
+            return outerArray
+
+        }
+
+        //print the arrays
+        arrayElement = printShape();
+        for (i = 0; i < arrayElement.length; i++) {
+
+            for (j = 0; j < arrayElement[i].length; j++) {
+                document.writeln(arrayElement[i][j]);
+            }
+            document.writeln("<br>");
+        }
+
+    </script>
+</body>
+
+</html>
